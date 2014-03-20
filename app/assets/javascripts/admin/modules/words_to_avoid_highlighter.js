@@ -6,6 +6,7 @@
     var $el = $(options.el);
 
     $el.highlightTextarea({
+      color: '#FFB040',
       caseSensitive: false,
       words: [
         "agenda",
@@ -47,6 +48,19 @@
         "utilise",
       ]
     });
+
+    var updateHighlightedWordsCount = function() {
+      var numberOfHighlightedWords = $(".highlighter span.highlight").length;
+
+      if(numberOfHighlightedWords) {
+        $("#js-words-to-avoid").show();
+        $("#js-words-to-avoid-count").html(numberOfHighlightedWords);
+      } else {
+        $("#js-words-to-avoid").hide();
+      }
+    }
+    $el.bind('keypress', updateHighlightedWordsCount);
+    updateHighlightedWordsCount();
   }
 
   GOVUK.WordsToAvoidHighlighter = WordsToAvoidHighlighter;
